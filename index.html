@@ -697,7 +697,7 @@
         </div>
         <div class="locked-indicator absolute top-2 right-2 text-amber-600/60 text-lg">
          🔒
-        </div></button> <!-- Lore --> <button onclick="showComingSoon('Lore')" class="menu-item text-center rounded-xl p-4 group relative overflow-hidden">
+                </div></button> <!-- Lore --> <button onclick="showLorePassword()" class="menu-item text-center rounded-xl p-4 group relative overflow-hidden">
         <div class="flex flex-col items-center gap-2">
          <div class="menu-icon">
           <svg class="w-10 h-10" viewbox="0 0 100 100" fill="#c9a959"><!-- Scroll body --> <rect x="30" y="25" width="40" height="50" rx="2" fill="currentColor" opacity="0.3" /> <!-- Top scroll rod --> <rect x="25" y="22" width="50" height="5" rx="2" fill="currentColor" /> <circle cx="27" cy="24.5" r="2" fill="currentColor" /> <circle cx="73" cy="24.5" r="2" fill="currentColor" /> <!-- Bottom scroll rod --> <rect x="25" y="73" width="50" height="5" rx="2" fill="currentColor" /> <circle cx="27" cy="75.5" r="2" fill="currentColor" /> <circle cx="73" cy="75.5" r="2" fill="currentColor" /> <!-- Text lines --> <line x1="38" y1="35" x2="62" y2="35" stroke="currentColor" stroke-width="1.5" opacity="0.6" /> <line x1="38" y1="42" x2="62" y2="42" stroke="currentColor" stroke-width="1.5" opacity="0.6" /> <line x1="38" y1="49" x2="62" y2="49" stroke="currentColor" stroke-width="1.5" opacity="0.6" /> <line x1="38" y1="56" x2="58" y2="56" stroke="currentColor" stroke-width="1.5" opacity="0.6" /> <line x1="38" y1="63" x2="62" y2="63" stroke="currentColor" stroke-width="1.5" opacity="0.6" /> <!-- Decorative runes --> <circle cx="50" cy="32" r="1" fill="currentColor" opacity="0.8" /> <circle cx="50" cy="68" r="1" fill="currentColor" opacity="0.8" />
@@ -734,8 +734,8 @@
     </div>
    </div><!-- Coming Soon Modal -->
    <div id="coming-soon-modal" class="hidden modal-overlay">
-    <div class="modal-content text-center px-4">
-     <div class="section-card rounded-2xl p-8 md:p-12 border-2 border-amber-700 max-w-md relative">
+       <div class="modal-content text-center px-4">
+     <div class="section-card rounded-2xl p-8 md:p-12 border-2 border-amber-700 max-w-md relative">␊
       <div class="pixel-corner corner-tl"></div>
       <div class="pixel-corner corner-tr"></div>
       <div class="pixel-corner corner-bl"></div>
@@ -745,6 +745,31 @@
       </div>
       <h2 id="coming-soon-title" class="font-title-dice text-3xl md:text-4xl font-bold text-amber-400 mb-4">Coming Soon</h2>
       <p id="coming-soon-message" class="text-amber-200/80 text-base md:text-lg mb-8 font-body-dice">This feature is currently under development</p><button onclick="hideComingSoon()" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase"> Back to Menu </button>
+     </div>
+    </div>
+   </div><!-- Lore Password Modal -->
+   <div id="lore-password-modal" class="hidden modal-overlay">
+    <div class="modal-content text-center px-4">
+     <div class="section-card rounded-2xl p-8 md:p-12 border-2 border-amber-700 max-w-md relative">
+      <div class="pixel-corner corner-tl"></div>
+      <div class="pixel-corner corner-tr"></div>
+      <div class="pixel-corner corner-bl"></div>
+      <div class="pixel-corner corner-br"></div>
+      <div class="text-6xl md:text-7xl mb-6">
+       🗝️
+      </div>
+      <h2 class="font-title-dice text-3xl md:text-4xl font-bold text-amber-400 mb-3">Lore Access</h2>
+      <p class="text-amber-200/80 text-base md:text-lg mb-6 font-body-dice">Enter the password to unlock the archives.</p>
+      <form onsubmit="submitLorePassword(event)" class="space-y-4">
+       <div class="glow-border rounded-lg">
+        <input id="lore-password" type="password" autocomplete="off" class="input-field w-full rounded-lg px-4 py-3 text-amber-100 font-body-dice text-base" placeholder="Enter password" />
+       </div>
+       <p id="lore-password-error" class="text-red-400 text-sm font-body-dice min-h-[1.25rem]"></p>
+       <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button type="submit" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase">Unlock Lore</button>
+        <button type="button" onclick="hideLorePassword()" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase">Back to Menu</button>
+       </div>
+      </form>
      </div>
     </div>
    </div><!-- Before the Dice Activity Screen -->
@@ -1140,6 +1165,40 @@
 
     function hideComingSoon() {
       document.getElementById('coming-soon-modal').classList.add('hidden');
+    }
+
+    function showLorePassword() {
+      const modal = document.getElementById('lore-password-modal');
+      const input = document.getElementById('lore-password');
+      const error = document.getElementById('lore-password-error');
+
+      input.value = '';
+      error.textContent = '';
+      modal.classList.remove('hidden');
+
+      setTimeout(() => {
+        input.focus();
+      }, 0);
+    }
+
+    function hideLorePassword() {
+      document.getElementById('lore-password-modal').classList.add('hidden');
+    }
+
+    function submitLorePassword(event) {
+      event.preventDefault();
+      const input = document.getElementById('lore-password');
+      const error = document.getElementById('lore-password-error');
+      const password = input.value.trim();
+
+      if (password.toLowerCase() === 'hourglass') {
+        window.location.href = 'https://hourglass.vvd.world/';
+        return;
+      }
+
+      error.textContent = 'Incorrect password. Try again.';
+      input.focus();
+      input.select();
     }
 
     // Progress tracking
@@ -1721,6 +1780,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb37232574e29c5',t:'MTc2Nzk1NjU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
