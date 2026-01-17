@@ -115,6 +115,41 @@
       position: relative;
       z-index: 1;
     }
+
+    .scroll-to-top {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      border: 2px solid rgba(139, 115, 85, 0.7);
+      background: linear-gradient(145deg, rgba(45, 35, 25, 0.95), rgba(30, 25, 20, 0.98));
+      color: rgba(201, 169, 89, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35),
+                  inset 0 0 18px rgba(201, 169, 89, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 60;
+    }
+
+    .scroll-to-top.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .scroll-to-top:hover {
+      border-color: rgba(201, 169, 89, 0.9);
+      box-shadow: 0 0 20px rgba(201, 169, 89, 0.35),
+                  0 0 40px rgba(201, 169, 89, 0.2),
+                  inset 0 0 18px rgba(201, 169, 89, 0.3);
+    }
     
     .scanline {
       position: absolute;
@@ -1050,10 +1085,32 @@
     </div>
    </div>
   </div>
+  <button id="scroll-to-top" class="scroll-to-top no-print" type="button" aria-label="Scroll to top">
+   <svg class="w-5 h-5" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 5l-7 7m7-7l7 7M12 5v14" stroke-linecap="round" stroke-linejoin="round"></path>
+   </svg>
+  </button>
   <script>
     let currentSection = 1;
     let completedSections = [];
     let lastDirection = 'forward';
+
+    const appContainer = document.getElementById('app-container');
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+    function updateScrollToTopVisibility() {
+      if (!appContainer || !scrollToTopBtn) return;
+      const shouldShow = appContainer.scrollTop > 200;
+      scrollToTopBtn.classList.toggle('is-visible', shouldShow);
+    }
+
+    if (appContainer && scrollToTopBtn) {
+      appContainer.addEventListener('scroll', updateScrollToTopVisibility);
+      scrollToTopBtn.addEventListener('click', () => {
+        appContainer.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      updateScrollToTopVisibility();
+    }
 
     // Navigation between home and activity
     function startBeforeDice() {
@@ -1662,5 +1719,6 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb37232574e29c5',t:'MTc2Nzk1NjU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
