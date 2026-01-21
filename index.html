@@ -1489,6 +1489,39 @@
         { key: 'secrets', title: '🔒 Secrets', fields: ['secrets_1', 'secrets_2', 'secrets_3'] }
       ];
 
+      const questionLabels = {
+        core_identity_1: 'Who are you when no one is watching, and who do you pretend to be instead?',
+        core_identity_2: 'What part of yourself are you most proud of?',
+        core_identity_3: 'What truth about you are you worried would impact how people see you if they knew it?',
+        emotional_1: 'What emotion most often drives your decisions?',
+        emotional_2: 'How do you react when you feel trapped or powerless?',
+        emotional_3: 'What belief about the world guides you, even if it might be wrong?',
+        past_1: 'What promise did you make that still affects your choices?',
+        past_2: 'Who failed you when it mattered most, and how did that change you?',
+        past_3: 'What did you lose that you never truly recovered from?',
+        relationships_1: 'Who from your past still has power over you?',
+        relationships_2: 'Who would you risk everything for, even if they do not deserve it?',
+        relationships_3: 'Who would be most affected if you disappeared tomorrow?',
+        morality_1: 'What line will you never cross, no matter the cost?',
+        morality_2: 'What line have you already crossed and justified to yourself?',
+        morality_3: 'What would make you turn against someone you love?',
+        fears_desires_1: 'What do you want more than anything else?',
+        fears_desires_2: 'What do you secretly resent others for having or being able to do?',
+        fears_desires_3: 'What are you most afraid of becoming?',
+        daily_life_1: 'What is your favourite food, and when do you usually eat it?',
+        daily_life_2: 'What personal item do you keep within reach at all times, and why?',
+        daily_life_3: 'What smell, taste, or texture instantly brings back a memory?',
+        style_1: 'How do you treat your armour and gear - e.g. meticulously, carelessly, ritualistically?',
+        style_2: 'What detail of your appearance do you maintain carefully, and what do you neglect?',
+        style_3: 'How do you physically carry yourself - e.g. confident, guarded, slouched, precise, restless?',
+        speech_1: 'How do you speak most of the time?',
+        speech_2: 'What verbal habit do you fall into under stress - e.g. swearing, silence, jokes?',
+        speech_3: 'What physical tell gives you away when you are lying or hiding something?',
+        secrets_1: 'What secret are you actively hiding right now?',
+        secrets_2: 'Who from your past could reappear and upend your life?',
+        secrets_3: 'What unfinished business will not stay buried?'
+      };
+
       categories.forEach(category => {
         const hasAnswers = category.fields.some(field => data[field] && data[field].trim());
         if (hasAnswers) {
@@ -1511,9 +1544,10 @@
                 'speech': [25, 26, 27],
                 'secrets': [28, 29, 30]
               };
+              const questionLabel = questionLabels[field] || `Question ${questionNumbers[category.key][index]}`;
               summaryHTML += `
                 <div>
-                  <p class="text-amber-300 text-xs">Question ${questionNumbers[category.key][index]}:</p>
+                  <p class="text-amber-300 text-xs">${questionLabel}</p>
                   <p class="text-amber-200/80">${data[field]}</p>
                 </div>
               `;
@@ -1779,6 +1813,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb37232574e29c5',t:'MTc2Nzk1NjU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
