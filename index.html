@@ -820,7 +820,7 @@
           </div>
          </div>
          <div class="grid md:grid-cols-3 gap-5">
-          <div class="glow-border rounded-lg"><label class="block text-amber-400 font-semibold mb-2 text-sm tracking-wide uppercase">Character Race</label> <select name="character_race" id="character_race" class="input-field w-full px-4 py-3 rounded-lg text-amber-100 cursor-pointer" data-track data-section-input="1" required> <option value="">Select Race...</option> <option value="aasimar">Aasimar</option> <option value="changeling">Changeling</option> <option value="dragonborn">Dragonborn</option> <option value="dwarf">Dwarf</option> <option value="elf">Elf</option> <option value="fairy">Fairy</option> <option value="genasi">Genasi</option> <option value="githyanki">Githyanki</option> <option value="gnome">Gnome</option> <option value="halfling">Halfling</option> <option value="human">Human</option> <option value="orc">Orc</option> <option value="tiefling">Tiefling</option> </select>
+            <div class="glow-border rounded-lg"><label class="block text-amber-400 font-semibold mb-2 text-sm tracking-wide uppercase">Character Race</label> <select name="character_race" id="character_race" class="input-field w-full px-4 py-3 rounded-lg text-amber-100 cursor-pointer" data-track data-section-input="1" required> <option value="">Select Race...</option> <option value="aasimar">Aasimar</option> <option value="bearfolk">Bearfolk</option> <option value="changeling">Changeling</option> <option value="dragonborn">Dragonborn</option> <option value="dwarf">Dwarf</option> <option value="elf">Elf</option> <option value="fairy">Fairy</option> <option value="genasi">Genasi</option> <option value="githyanki">Githyanki</option> <option value="gnome">Gnome</option> <option value="halfling">Halfling</option> <option value="human">Human</option> <option value="orc">Orc</option> <option value="shade">Shade</option> <option value="tiefling">Tiefling</option> </select>
            <div id="race-comment" class="mt-3 text-amber-500/90 text-sm italic font-body-dice leading-relaxed min-h-[20px]"></div>
           </div>
           <div class="glow-border rounded-lg"><label class="block text-amber-400 font-semibold mb-2 text-sm tracking-wide uppercase">Character Class</label> <select name="character_class" id="character_class" class="input-field w-full px-4 py-3 rounded-lg text-amber-100 cursor-pointer" data-track data-section-input="1" required> <option value="">Select Class...</option> <option value="artificer">Artificer</option> <option value="barbarian">Barbarian</option> <option value="bard">Bard</option> <option value="cleric">Cleric</option> <option value="druid">Druid</option> <option value="fighter">Fighter</option> <option value="monk">Monk</option> <option value="paladin">Paladin</option> <option value="ranger">Ranger</option> <option value="rogue">Rogue</option> <option value="sorcerer">Sorcerer</option> <option value="warlock">Warlock</option> <option value="wizard">Wizard</option> </select>
@@ -1639,6 +1639,7 @@
 
     const raceComments = {
       'aasimar': 'Ah yes. Burdened by destiny, glowing expectations, and the assumption you\'re morally correct.',
+      'bearfolk': 'Carrying the burden again, are we?',
       'changeling': 'You couldn\'t commit to one identity, so you chose all of them. Concerning. Interesting.',
       'dragonborn': 'You wanted presence. Volume. Possibly fire. We noticed.',
       'dwarf': 'You trust tradition, stone, and grudges that last longer than kingdoms.',
@@ -1650,6 +1651,7 @@
       'halfling': 'You chose comfort, resilience, and the quiet confidence of someone who will survive everyone else.',
       'human': 'Bold choice. Really went off-script there.',
       'orc': 'You\'re here to challenge assumptions, including your own.',
+      'shade': 'You were never very good at letting go, were you?',
       'tiefling': 'You like being judged on sight and are absolutely prepared to lean into it.'
     };
 
@@ -1822,6 +1824,7 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb37232574e29c5',t:'MTc2Nzk1NjU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
