@@ -743,7 +743,7 @@
        ✨
       </div>
       <h2 id="coming-soon-title" class="font-title-dice text-3xl md:text-4xl font-bold text-amber-400 mb-4">Coming Soon</h2>
-      <p id="coming-soon-message" class="text-amber-200/80 text-base md:text-lg mb-8 font-body-dice">This feature is currently under development</p><button onclick="hideComingSoon()" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase"> Merchant's Ledger </button>
+      <p id="coming-soon-message" class="text-amber-200/80 text-base md:text-lg mb-8 font-body-dice">This feature is currently under development</p><button onclick="hideComingSoon(); window.open('https://rae-galdes.github.io/Nat20/', '_blank', 'noopener')" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase"> Merchant's Ledger </button>
      </div>
     </div>
    </div><!-- Lore Password Modal -->
@@ -1157,8 +1157,8 @@
       const title = document.getElementById('coming-soon-title');
       const message = document.getElementById('coming-soon-message');
       
-      title.textContent = 'COMING SOON';
-      message.textContent = `${featureName} is a trusty little tool for weighing coin, charm, and consequence in equal measure.
+      title.textContent = 'Trade Calculator';
+      message.textContent = `${featureName} Calculator (Merchant's Ledger) is a trusty little tool for weighing coin, charm, and consequence in equal measure.
 Factor in your silver tongue, your standing in the realm, and strike deals that feel fair, or dangerously clever, depending on how bold you’re feeling.`;
       
       modal.classList.remove('hidden');
