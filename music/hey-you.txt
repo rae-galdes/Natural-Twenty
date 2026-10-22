@@ -1,6 +1,6 @@
 Hey You
 
-Verse 1
+[Verse 1]
 My baby don't mess around
 Because she loves me so
 And this I know for sure 
@@ -18,12 +18,12 @@ For sticking two together
 'Cause we don't know how
 
 
-Chorus 1
+[Chorus 1]
 Hey ya, hey ya
 Hey ya, hey ya
 
 
-Verse 2
+[Verse 2]
 You think you've got it
 Oh, you think you've got it
 But got it just don't get it if there's nothing at all
@@ -46,14 +46,14 @@ When you know you're not happy here?
 (You don't hear me, you just want to dance)
 
 
-Chorus 2
+[Chorus 2]
 (Uh, oh) Hey ya 
 Hey ya, hey ya 
 Hey ya, hey ya
 (Yeah, hey ya)
 
 
-Verse 3
+[Verse 3]
 Alright now, Rowdies (yeah?)
 You know what’s cooler than being cool? (Ice cold)
 I can't hear you
@@ -68,7 +68,7 @@ Now, I want to see you all on your baddest behaviour
 Lend me some sugar, I am your neighbour
 
 
-Bridge
+[Bridge]
 Now let me shake it (uh)
 Shake it, be shaken (uh, oh)
 Shake it (uh), shake it, shake it (uh, oh)
@@ -83,7 +83,7 @@ Shake it (uh), you know what to do
 You know what to…
 
 
-Chorus 3
+[Chorus 3]
 Hey ya, hey ya 
 Hey ya, hey ya
 Hey ya, hey ya
