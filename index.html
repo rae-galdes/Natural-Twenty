@@ -756,6 +756,211 @@
         padding: 20px !important;
       }
     }
+  
+    /* ---------- Bard's Hall (song library) ---------- */
+
+    #music-screen header.parchment-bg {
+      background: linear-gradient(180deg, rgba(18, 14, 10, 0.97), rgba(24, 18, 13, 0.95));
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      border-bottom: 1px solid rgba(201, 161, 95, 0.18);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
+
+    #music-screen:not(.hidden) {
+      animation: fadeIn 0.45s ease both;
+    }
+
+    .song-card {
+      flex: 1 1 11rem;
+      max-width: 16rem;
+    }
+
+    #btn-back svg,
+    #btn-fwd svg { width: 24px; height: 24px; }
+
+    .song-card.is-active {
+      border-color: var(--gilt);
+    }
+
+    .song-card.is-active::before {
+      opacity: 1;
+    }
+
+    .song-card.is-missing {
+      opacity: 0.6;
+    }
+
+    .song-icon svg {
+      width: 3.25rem;
+      height: 3.25rem;
+    }
+
+    .song-title {
+      font-family: var(--font-black);
+      font-weight: 400;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .eq span {
+      width: 3px;
+      height: 100%;
+      background: var(--rubric-light);
+      transform-origin: bottom;
+      transform: scaleY(0.3);
+    }
+
+    .song-card.is-playing .eq { opacity: 1; }
+    .song-card.is-playing .eq span { animation: eqBar 1s ease-in-out infinite; }
+    .song-card.is-playing .eq span:nth-child(2) { animation-delay: -0.4s; }
+    .song-card.is-playing .eq span:nth-child(3) { animation-delay: -0.7s; }
+    .song-card.is-playing .eq span:nth-child(4) { animation-delay: -0.2s; }
+
+    @keyframes eqBar {
+      0%, 100% { transform: scaleY(0.25); }
+      50% { transform: scaleY(1); }
+    }
+
+    .player-time {
+      font-family: var(--font-fell);
+      font-variant-numeric: tabular-nums;
+      color: #ab8653;
+      font-size: 0.85rem;
+      min-width: 2.75rem;
+      text-align: center;
+    }
+
+    .player-range {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      border: 1px solid var(--rule);
+      outline: none;
+      background: linear-gradient(90deg, var(--blood), var(--rubric-light) var(--pct, 0%), rgba(16, 12, 8, 0.75) var(--pct, 0%));
+    }
+
+    .player-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #d6b06c, #8a6a42 70%);
+      border: 1px solid #2a1f15;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .player-range::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #d6b06c, #8a6a42 70%);
+      border: 1px solid #2a1f15;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .player-range::-moz-range-track { background: transparent; }
+    .player-range:disabled { opacity: 0.45; }
+
+    .player-range:focus-visible {
+      outline: 2px solid var(--gilt);
+      outline-offset: 3px;
+    }
+
+    .player-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gilt);
+      background: radial-gradient(circle at 35% 30%, #3e3022, #241b13 70%);
+      border: 1px solid var(--umber);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45), inset 0 0 0 3px rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .player-btn:hover:not(:disabled) {
+      border-color: var(--gilt);
+      color: #e0bf80;
+      transform: translateY(-1px);
+    }
+
+    .player-btn:focus-visible {
+      outline: 2px solid var(--gilt);
+      outline-offset: 2px;
+    }
+
+    .player-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .player-btn svg { width: 20px; height: 20px; }
+
+    .player-btn-main {
+      width: 64px;
+      height: 64px;
+      color: #f3e6c8;
+      background: linear-gradient(180deg, #9c3523 0%, #7a2416 55%, var(--blood) 100%);
+      border-color: #2a0d08;
+      box-shadow: inset 0 1px 0 rgba(255, 200, 170, 0.25), 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .player-btn-main:hover:not(:disabled) { color: #fff4dc; border-color: #2a0d08; }
+    .player-btn-main svg { width: 26px; height: 26px; }
+
+    .player-btn-small { width: 36px; height: 36px; }
+    .player-btn-small svg { width: 16px; height: 16px; }
+
+    .lyrics-panel summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      color: var(--gilt);
+      font-family: var(--font-fell-sc);
+      letter-spacing: 0.08em;
+      border-top: 1px solid rgba(201, 161, 95, 0.2);
+      cursor: pointer;
+    }
+
+    .lyrics-panel summary::-webkit-details-marker { display: none; }
+
+    .lyrics-panel summary:focus-visible {
+      outline: 2px solid var(--gilt);
+      outline-offset: 2px;
+    }
+
+    .lyrics-panel .chev { transition: transform 0.25s ease; }
+    .lyrics-panel[open] .chev { transform: rotate(180deg); }
+
+    .lyrics-body {
+      white-space: pre-wrap;
+      text-align: center;
+      font-family: var(--font-fell);
+      line-height: 1.8;
+      color: #dccaa2;
+      max-height: 22rem;
+      overflow-y: auto;
+      padding: 0.5rem 1rem 1rem;
+      animation: fadeIn 0.3s ease both;
+    }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -834,7 +1039,21 @@
         <div class="locked-indicator absolute top-2 right-2 text-amber-600/60 text-lg">
          
         </div></button>
-       <div class="scanline"></div>
+       <!-- Bard's Hall --> <button onclick="showMusicPassword()" class="menu-item text-center rounded-xl p-4 group relative overflow-hidden md:col-span-2 md:w-1/2 md:mx-auto">
+        <div class="flex flex-col items-center gap-2">
+         <div class="menu-icon">
+          <svg class="w-10 h-10" viewbox="0 0 100 100" fill="currentColor"><!-- Lyre arms --> <path d="M36 72 C22 64 18 44 26 30 C29 25 27 20 22 17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" /> <path d="M64 72 C78 64 82 44 74 30 C71 25 73 20 78 17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" /> <!-- Crossbar --> <line x1="25" y1="28" x2="75" y2="28" stroke="currentColor" stroke-width="3" stroke-linecap="round" /> <!-- Sound box --> <rect x="32" y="70" width="36" height="14" rx="4" opacity="0.35" /> <rect x="32" y="70" width="36" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2" /> <!-- Strings --> <line x1="42" y1="28" x2="42" y2="72" stroke="currentColor" stroke-width="1" opacity="0.7" /> <line x1="47" y1="28" x2="47" y2="72" stroke="currentColor" stroke-width="1" opacity="0.7" /> <line x1="53" y1="28" x2="53" y2="72" stroke="currentColor" stroke-width="1" opacity="0.7" /> <line x1="58" y1="28" x2="58" y2="72" stroke="currentColor" stroke-width="1" opacity="0.7" /> <!-- Sparkles --> <circle cx="15" cy="20" r="1.5" /> <circle cx="85" cy="22" r="1" /> <circle cx="14" cy="80" r="1" /> <circle cx="86" cy="78" r="1.5" />
+          </svg>
+         </div>
+         <div>
+          <h2 class="font-title-dice text-base font-bold text-amber-300 menu-text mb-0.5 tracking-wide">Bard's Hall</h2>
+          <p class="text-amber-500/80 text-xs font-body-dice">Song Library</p>
+         </div>
+        </div>
+        <div class="locked-indicator absolute top-2 right-2 text-amber-600/60 text-lg">
+         🔒
+        </div></button>
+<div class="scanline"></div>
       </nav><!-- Version Info -->
       <div class="text-center mt-6 md:mt-8">
        <div class="ornament w-24 mx-auto mb-2"></div>
@@ -882,7 +1101,93 @@
       </form>
      </div>
     </div>
-   </div><!-- Before the Dice Activity Screen -->
+   </div><!-- Bard's Hall Password Modal -->
+   <div id="music-password-modal" class="hidden modal-overlay">
+    <div class="modal-content text-center px-4">
+     <div class="section-card rounded-2xl p-8 md:p-12 border-2 border-amber-700 max-w-md relative">
+      <div class="pixel-corner corner-tl"></div>
+      <div class="pixel-corner corner-tr"></div>
+      <div class="pixel-corner corner-bl"></div>
+      <div class="pixel-corner corner-br"></div>
+      <div class="text-6xl md:text-7xl mb-6">
+       🎶
+      </div>
+      <h2 class="font-title-dice text-3xl md:text-4xl font-bold text-amber-400 mb-3">Bard's Hall</h2>
+      <p class="text-amber-200/80 text-base md:text-lg mb-6 font-body-dice">Enter the password to hear the songs of the campaign.</p>
+      <form onsubmit="submitMusicPassword(event)" class="space-y-4">
+       <div class="glow-border rounded-lg">
+        <input id="music-password" type="password" autocomplete="off" class="input-field w-full rounded-lg px-4 py-3 text-amber-100 font-body-dice text-base" placeholder="Enter password" />
+       </div>
+       <p id="music-password-error" class="text-red-400 text-sm font-body-dice min-h-[1.25rem]"></p>
+       <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button type="submit" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase">Enter the Hall</button>
+        <button type="button" onclick="hideMusicPassword()" class="nav-btn font-title-dice font-bold text-amber-950 px-8 py-3 rounded-lg tracking-wide uppercase">Back to Menu</button>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div><!-- Bard's Hall Screen -->
+   <div id="music-screen" class="min-h-full w-full hidden font-body-dice parchment-bg text-amber-100">
+    <div class="min-h-full w-full">
+     <header class="sticky top-0 z-50 parchment-bg">
+      <div class="max-w-4xl mx-auto px-4 py-3">
+       <div class="flex items-center justify-between"><button type="button" onclick="leaveBardsHall()" class="flex items-center gap-2 text-amber-600 hover:text-amber-400 transition-colors font-title-dice tracking-wide"> <span class="text-xl">←</span> <span class="text-sm">Back to Menu</span> </button>
+        <div class="flex items-center gap-2">
+         <svg class="w-8 h-8 text-amber-600" viewbox="0 0 100 100" fill="currentColor"><path d="M36 72 C22 64 18 44 26 30 C29 25 27 20 22 17" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" /> <path d="M64 72 C78 64 82 44 74 30 C71 25 73 20 78 17" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" /> <line x1="25" y1="28" x2="75" y2="28" stroke="currentColor" stroke-width="4" stroke-linecap="round" /> <rect x="32" y="70" width="36" height="14" rx="4" /> <line x1="44" y1="28" x2="44" y2="72" stroke="currentColor" stroke-width="2" /> <line x1="50" y1="28" x2="50" y2="72" stroke="currentColor" stroke-width="2" /> <line x1="56" y1="28" x2="56" y2="72" stroke="currentColor" stroke-width="2" />
+         </svg>
+         <div>
+          <h1 class="font-title-dice text-lg md:text-xl font-bold text-amber-400 tracking-wide">Bard's Hall</h1>
+          <p class="text-xs text-amber-600/80 font-title-dice tracking-widest uppercase">Songs of the Campaign</p>
+         </div>
+        </div>
+        <div class="hidden sm:block w-28"></div>
+       </div>
+      </div>
+     </header>
+     <main class="max-w-4xl mx-auto px-4 py-8">
+      <div class="text-center mb-8">
+       <p class="text-sm text-amber-600/70 max-w-lg mx-auto leading-relaxed italic">Choose an instrument and the bard will play.</p>
+       <div class="ornament w-32 mx-auto mt-3"></div>
+      </div>
+      <div id="song-list" class="flex flex-wrap justify-center gap-4 mb-8"></div>
+      <section id="music-player" class="section-card rounded-lg p-6 md:p-10" aria-label="Music player">
+       <div class="pixel-corner corner-tl"></div>
+       <div class="pixel-corner corner-tr"></div>
+       <div class="pixel-corner corner-bl"></div>
+       <div class="pixel-corner corner-br"></div>
+       <audio id="bard-audio" preload="metadata"></audio>
+       <div class="text-center mb-6">
+        <p id="player-status" class="text-xs uppercase tracking-widest text-amber-600 font-title-dice" aria-live="polite">Silence in the hall</p>
+        <h2 id="player-title" class="font-title-dice text-3xl md:text-4xl text-amber-400 mt-2">Choose an instrument</h2>
+        <p id="player-artist" class="text-amber-500 italic mt-1 min-h-[1.5rem]"></p>
+       </div>
+       <div class="flex items-center gap-3"><span id="time-current" class="player-time">0:00</span> <input id="bard-progress" type="range" min="0" max="1000" step="1" value="0" class="player-range flex-1" aria-label="Seek" disabled> <span id="time-total" class="player-time">0:00</span>
+       </div>
+       <div class="flex items-center justify-center gap-3 md:gap-4 mt-6"><button type="button" id="btn-prev" class="player-btn" aria-label="Previous song" disabled>
+         <svg viewbox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="2.5" height="14" rx="0.5" /><path d="M19 5v14L8.5 12z" /></svg></button> <button type="button" id="btn-back" class="player-btn" aria-label="Back 10 seconds" disabled>
+         <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a7.5 7.5 0 1 1-7 4.8" /><path d="M4.5 4v5.3h5.3" /><text x="12.4" y="15.6" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Georgia, serif" fill="currentColor" stroke="none">10</text></svg></button> <button type="button" id="btn-play" class="player-btn player-btn-main" aria-label="Play">
+         <svg id="icon-play" viewbox="0 0 24 24" fill="currentColor"><path d="M8 4.8v14.4L19.5 12z" /></svg>
+         <svg id="icon-pause" class="hidden" viewbox="0 0 24 24" fill="currentColor"><rect x="6" y="4.8" width="4" height="14.4" rx="1" /><rect x="14" y="4.8" width="4" height="14.4" rx="1" /></svg></button> <button type="button" id="btn-fwd" class="player-btn" aria-label="Forward 10 seconds" disabled>
+         <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a7.5 7.5 0 1 0 7 4.8" /><path d="M19.5 4v5.3h-5.3" /><text x="11.6" y="15.6" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Georgia, serif" fill="currentColor" stroke="none">10</text></svg></button> <button type="button" id="btn-next" class="player-btn" aria-label="Next song" disabled>
+         <svg viewbox="0 0 24 24" fill="currentColor"><path d="M5 5v14l10.5-7z" /><rect x="16.5" y="5" width="2.5" height="14" rx="0.5" /></svg></button>
+       </div>
+       <div class="flex items-center justify-center gap-3 mt-6"><button type="button" id="btn-mute" class="player-btn player-btn-small" aria-label="Mute">
+         <svg id="icon-volume" viewbox="0 0 24 24" fill="currentColor"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+         <svg id="icon-muted" class="hidden" viewbox="0 0 24 24" fill="currentColor"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></button> <input id="bard-volume" type="range" min="0" max="1" step="0.01" value="0.9" class="player-range w-36" aria-label="Volume">
+       </div>
+       <p id="player-error" class="text-red-400 text-sm text-center mt-4 min-h-[1.25rem] font-body-dice" role="alert"></p>
+       <details id="lyrics-panel" class="lyrics-panel mt-2">
+        <summary>Lyrics <svg class="chev w-4 h-4" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6" /></svg></summary>
+        <div id="lyrics-body" class="lyrics-body">Choose a song to see its lyrics.</div>
+       </details>
+      </section>
+     </main>
+     <footer class="border-t border-amber-900/30 py-8 text-center">
+      <div class="ornament w-24 mx-auto"></div>
+     </footer>
+    </div>
+   </div>
+<!-- Before the Dice Activity Screen -->
    <div id="before-dice-screen" class="min-h-full w-full hidden font-body-dice parchment-bg text-amber-100">
     <div class="min-h-full w-full"><!-- Header -->
      <header class="sticky top-0 z-50 parchment-bg border-b border-amber-900/50 backdrop-blur-sm">
@@ -1933,6 +2238,421 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
     updateProgress();
     updateSectionDots();
     checkCategoryUnlock();
+  </script>
+   <script>
+    /* =========================================================
+       BARD'S HALL : song library
+       To add a song:
+         1. Put the MP3 in the "music" folder of your repository.
+         2. Add one line to SONGS below, copying the pattern.
+       instrument can be: lute, drum, horn, flute, harp
+       lyrics is optional: the path to a plain .txt file, or ''
+       ========================================================= */
+    const SONGS = [
+      { title: 'Hey You', artist: 'Druncle', instrument: 'lute', src: 'music/hey-you.mp3', lyrics: 'music/hey-you.txt' }
+    ];
+
+    const BARDS_HALL_PASSWORD = 'hourglass';
+
+    const INSTRUMENT_ICONS = {
+      lute: '<svg viewBox="0 0 100 100" fill="currentColor"><g transform="rotate(-30 50 55)"><path d="M50 40 C34 40 28 56 30 70 C32 84 42 92 50 92 C58 92 68 84 70 70 C72 56 66 40 50 40Z" opacity="0.35"/><path d="M50 40 C34 40 28 56 30 70 C32 84 42 92 50 92 C58 92 68 84 70 70 C72 56 66 40 50 40Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="62" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="47" y="12" width="6" height="30"/><path d="M45 12 L55 12 L58 4 L42 4Z"/><line x1="48.5" y1="16" x2="48.5" y2="84" stroke="currentColor" stroke-width="0.7"/><line x1="51.5" y1="16" x2="51.5" y2="84" stroke="currentColor" stroke-width="0.7"/><rect x="43" y="80" width="14" height="3" rx="1"/></g></svg>',
+      drum: '<svg viewBox="0 0 100 100" fill="currentColor"><ellipse cx="50" cy="38" rx="28" ry="9" opacity="0.5"/><path d="M22 38 L22 72 Q50 86 78 72 L78 38" opacity="0.3"/><ellipse cx="50" cy="38" rx="28" ry="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M22 38 L22 72 Q50 86 78 72 L78 38" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 46 L36 76 L48 47 L60 78 L72 46" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8"/><line x1="58" y1="30" x2="82" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="44" y1="30" x2="22" y2="10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+      horn: '<svg viewBox="0 0 100 100" fill="currentColor"><path d="M14 70 C30 70 52 62 66 44 L80 30 L88 50 L72 54 C58 70 36 80 16 78Z" opacity="0.35"/><path d="M14 70 C30 70 52 62 66 44 L80 30 L88 50 L72 54 C58 70 36 80 16 78Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><ellipse cx="84" cy="40" rx="5" ry="11" transform="rotate(-25 84 40)" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="70" width="6" height="8" rx="1"/><path d="M40 70 Q44 60 52 60" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>',
+      flute: '<svg viewBox="0 0 100 100" fill="currentColor"><g transform="rotate(-35 50 50)"><rect x="10" y="45" width="80" height="10" rx="3" opacity="0.35"/><rect x="10" y="45" width="80" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="22" cy="50" r="2"/><circle cx="40" cy="50" r="2"/><circle cx="50" cy="50" r="2"/><circle cx="60" cy="50" r="2"/><circle cx="70" cy="50" r="2"/><circle cx="80" cy="50" r="2"/><rect x="14" y="43" width="3" height="14"/><rect x="84" y="43" width="3" height="14"/></g></svg>',
+      harp: '<svg viewBox="0 0 100 100" fill="currentColor"><path d="M28 88 L28 14 C48 14 60 30 76 34 C80 35 80 40 76 42 L34 88Z" opacity="0.3"/><path d="M28 88 L28 14 C48 14 60 30 76 34 C80 35 80 40 76 42 L34 88" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="24" y="84" width="16" height="5" rx="1"/><g stroke="currentColor" stroke-width="1" opacity="0.8"><line x1="36" y1="15" x2="36" y2="85"/><line x1="44" y1="17" x2="44" y2="77"/><line x1="52" y1="21" x2="52" y2="68"/><line x1="60" y1="26" x2="60" y2="59"/><line x1="68" y1="31" x2="68" y2="51"/></g></svg>'
+    };
+
+    const bardAudio = document.getElementById('bard-audio');
+    const bardProgress = document.getElementById('bard-progress');
+    const bardVolume = document.getElementById('bard-volume');
+    let bardCurrent = -1;
+    let bardCardsBuilt = false;
+    let bardLyricsFor = -1;
+    let bardSeeking = false;
+
+    function bardFormatTime(sec) {
+      if (!isFinite(sec) || sec < 0) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function bardIsUnlocked() {
+      try { return sessionStorage.getItem('n20-bards-hall') === '1'; } catch (e) { return false; }
+    }
+
+    function bardRememberUnlock() {
+      try { sessionStorage.setItem('n20-bards-hall', '1'); } catch (e) { /* storage unavailable */ }
+    }
+
+    // ---------- Password ----------
+
+    function showMusicPassword() {
+      if (bardIsUnlocked()) {
+        openBardsHall();
+        return;
+      }
+      const modal = document.getElementById('music-password-modal');
+      const input = document.getElementById('music-password');
+      document.getElementById('music-password-error').textContent = '';
+      input.value = '';
+      modal.classList.remove('hidden');
+      setTimeout(() => input.focus(), 0);
+    }
+
+    function hideMusicPassword() {
+      document.getElementById('music-password-modal').classList.add('hidden');
+    }
+
+    function submitMusicPassword(event) {
+      event.preventDefault();
+      const input = document.getElementById('music-password');
+      const error = document.getElementById('music-password-error');
+      if (input.value.trim().toLowerCase() === BARDS_HALL_PASSWORD) {
+        bardRememberUnlock();
+        hideMusicPassword();
+        openBardsHall();
+        return;
+      }
+      error.textContent = 'Incorrect password. Try again.';
+      input.focus();
+      input.select();
+    }
+
+    // ---------- Screens ----------
+
+    function openBardsHall() {
+      document.getElementById('home-screen').classList.add('hidden');
+      document.getElementById('music-screen').classList.remove('hidden');
+      bardBuildCards();
+      document.getElementById('app-container').scrollTo({ top: 0 });
+    }
+
+    function leaveBardsHall() {
+      bardAudio.pause();
+      document.getElementById('music-screen').classList.add('hidden');
+      document.getElementById('home-screen').classList.remove('hidden');
+      document.getElementById('app-container').scrollTo({ top: 0 });
+    }
+
+    // ---------- Library cards ----------
+
+    function bardBuildCards() {
+      if (bardCardsBuilt) return;
+      bardCardsBuilt = true;
+      const list = document.getElementById('song-list');
+
+      if (!SONGS.length) {
+        list.innerHTML = '<p class="col-span-full text-center text-amber-600 italic">The hall is quiet. No songs yet.</p>';
+        return;
+      }
+
+      SONGS.forEach((song, i) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'song-card menu-item text-center rounded-xl p-4';
+        card.dataset.index = i;
+        card.setAttribute('aria-pressed', 'false');
+        card.innerHTML =
+          '<div class="flex flex-col items-center gap-2">' +
+            '<div class="menu-icon song-icon">' + (INSTRUMENT_ICONS[song.instrument] || INSTRUMENT_ICONS.lute) + '</div>' +
+            '<h3 class="song-title text-amber-300"></h3>' +
+            '<p class="text-amber-500/80 text-xs"><span class="song-artist"></span> · <span class="song-length">--:--</span></p>' +
+            '<div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></div>' +
+          '</div>';
+        card.querySelector('.song-title').textContent = song.title;
+        card.querySelector('.song-artist').textContent = song.artist;
+        card.addEventListener('click', () => bardSelect(i));
+        list.appendChild(card);
+
+        // Read each song's length without downloading the whole file
+        const probe = new Audio();
+        probe.preload = 'metadata';
+        probe.addEventListener('loadedmetadata', () => {
+          card.querySelector('.song-length').textContent = bardFormatTime(probe.duration);
+        });
+        probe.addEventListener('error', () => {
+          card.querySelector('.song-length').textContent = 'file missing';
+          card.classList.add('is-missing');
+        });
+        probe.src = song.src;
+      });
+    }
+
+    function bardUpdateCards() {
+      document.querySelectorAll('.song-card').forEach(card => {
+        const active = Number(card.dataset.index) === bardCurrent;
+        card.classList.toggle('is-active', active);
+        card.classList.toggle('is-playing', active && !bardAudio.paused);
+        card.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    }
+
+    // ---------- Playback ----------
+
+    function bardSetStatus(text) {
+      document.getElementById('player-status').textContent = text;
+    }
+
+    function bardSetError(text) {
+      document.getElementById('player-error').textContent = text;
+    }
+
+    function bardSetControls(enabled) {
+      ['btn-prev', 'btn-back', 'btn-fwd'].forEach(id => {
+        document.getElementById(id).disabled = !enabled;
+      });
+      document.getElementById('btn-next').disabled = !enabled || bardCurrent >= SONGS.length - 1;
+    }
+
+    function bardResetProgress() {
+      bardProgress.value = 0;
+      bardProgress.style.setProperty('--pct', '0%');
+      bardProgress.disabled = true;
+      document.getElementById('time-current').textContent = '0:00';
+      document.getElementById('time-total').textContent = '0:00';
+    }
+
+    function bardUpdateProgress() {
+      const dur = bardAudio.duration;
+      const pct = dur ? (bardAudio.currentTime / dur) * 100 : 0;
+      bardProgress.value = Math.round(pct * 10);
+      bardProgress.style.setProperty('--pct', pct + '%');
+      document.getElementById('time-current').textContent = bardFormatTime(bardAudio.currentTime);
+    }
+
+    function bardPlay() {
+      const attempt = bardAudio.play();
+      if (attempt) {
+        attempt.catch(err => {
+          if (err.name !== 'AbortError' && err.name !== 'NotSupportedError') bardSetError('The song could not start. Press play to try again.');
+        });
+      }
+    }
+
+    function bardLoad(index, autoplay) {
+      bardCurrent = index;
+      const song = SONGS[index];
+      bardSetError('');
+      bardAudio.src = song.src;
+      document.getElementById('player-title').textContent = song.title;
+      document.getElementById('player-artist').textContent = song.artist;
+      bardSetStatus('Tuning the ' + song.instrument + '…');
+      bardResetProgress();
+      bardSetControls(true);
+      bardUpdateCards();
+      bardLyricsFor = -1;
+      if (document.getElementById('lyrics-panel').open) bardLoadLyrics();
+      bardSetMediaSession(song);
+      if (autoplay) bardPlay();
+    }
+
+    function bardSelect(index) {
+      if (index === bardCurrent) {
+        bardToggle();
+      } else {
+        bardLoad(index, true);
+      }
+    }
+
+    function bardToggle() {
+      if (bardCurrent < 0) {
+        if (SONGS.length) bardLoad(0, true);
+        return;
+      }
+      if (bardAudio.paused) bardPlay(); else bardAudio.pause();
+    }
+
+    function bardSkip(seconds) {
+      if (bardCurrent < 0 || !isFinite(bardAudio.duration)) return;
+      bardAudio.currentTime = Math.min(Math.max(bardAudio.currentTime + seconds, 0), bardAudio.duration);
+      bardUpdateProgress();
+    }
+
+    function bardPrev() {
+      if (bardCurrent < 0) return;
+      if (bardAudio.currentTime > 3 || bardCurrent === 0) {
+        bardAudio.currentTime = 0;
+        bardUpdateProgress();
+      } else {
+        bardLoad(bardCurrent - 1, !bardAudio.paused);
+      }
+    }
+
+    function bardNext() {
+      if (bardCurrent < 0 || bardCurrent >= SONGS.length - 1) return;
+      bardLoad(bardCurrent + 1, !bardAudio.paused);
+    }
+
+    function bardSyncPlayIcon() {
+      const playing = !bardAudio.paused;
+      document.getElementById('icon-play').classList.toggle('hidden', playing);
+      document.getElementById('icon-pause').classList.toggle('hidden', !playing);
+      document.getElementById('btn-play').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    }
+
+    bardAudio.addEventListener('play', () => {
+      bardSetStatus('Now playing');
+      bardSyncPlayIcon();
+      bardUpdateCards();
+    });
+
+    bardAudio.addEventListener('pause', () => {
+      if (!bardAudio.ended) bardSetStatus('Paused');
+      bardSyncPlayIcon();
+      bardUpdateCards();
+    });
+
+    bardAudio.addEventListener('ended', () => {
+      if (bardCurrent < SONGS.length - 1) {
+        bardLoad(bardCurrent + 1, true);
+      } else {
+        bardSetStatus('The song has ended');
+        bardAudio.currentTime = 0;
+        bardUpdateProgress();
+      }
+    });
+
+    bardAudio.addEventListener('loadedmetadata', () => {
+      document.getElementById('time-total').textContent = bardFormatTime(bardAudio.duration);
+      bardProgress.disabled = false;
+      if (bardAudio.paused) bardSetStatus('Ready');
+    });
+
+    bardAudio.addEventListener('timeupdate', () => {
+      if (!bardSeeking) bardUpdateProgress();
+    });
+
+    bardAudio.addEventListener('error', () => {
+      if (bardCurrent < 0 || !bardAudio.getAttribute('src')) return;
+      bardSetError('Could not load "' + SONGS[bardCurrent].src + '". Check the file is in your repository at that exact path.');
+      bardSetStatus('Silence in the hall');
+      bardSyncPlayIcon();
+      bardUpdateCards();
+    });
+
+    bardProgress.addEventListener('input', () => {
+      bardSeeking = true;
+      const dur = bardAudio.duration;
+      if (!dur) return;
+      const target = (bardProgress.value / 1000) * dur;
+      bardProgress.style.setProperty('--pct', (bardProgress.value / 10) + '%');
+      document.getElementById('time-current').textContent = bardFormatTime(target);
+      bardAudio.currentTime = target;
+    });
+
+    bardProgress.addEventListener('change', () => {
+      bardSeeking = false;
+    });
+
+    // ---------- Volume ----------
+
+    function bardSyncVolume() {
+      const silent = bardAudio.muted || bardAudio.volume === 0;
+      document.getElementById('icon-volume').classList.toggle('hidden', silent);
+      document.getElementById('icon-muted').classList.toggle('hidden', !silent);
+      document.getElementById('btn-mute').setAttribute('aria-label', bardAudio.muted ? 'Unmute' : 'Mute');
+      bardVolume.style.setProperty('--pct', (bardAudio.muted ? 0 : bardAudio.volume * 100) + '%');
+    }
+
+    bardVolume.addEventListener('input', () => {
+      bardAudio.volume = Number(bardVolume.value);
+      if (bardAudio.volume > 0) bardAudio.muted = false;
+      bardSyncVolume();
+    });
+
+    document.getElementById('btn-mute').addEventListener('click', () => {
+      bardAudio.muted = !bardAudio.muted;
+      if (!bardAudio.muted && bardAudio.volume === 0) {
+        bardAudio.volume = 0.5;
+        bardVolume.value = 0.5;
+      }
+      bardSyncVolume();
+    });
+
+    // ---------- Buttons and keys ----------
+
+    document.getElementById('btn-play').addEventListener('click', bardToggle);
+    document.getElementById('btn-back').addEventListener('click', () => bardSkip(-10));
+    document.getElementById('btn-fwd').addEventListener('click', () => bardSkip(10));
+    document.getElementById('btn-prev').addEventListener('click', bardPrev);
+    document.getElementById('btn-next').addEventListener('click', bardNext);
+
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('music-screen').classList.contains('hidden')) return;
+      if (document.querySelector('.modal-overlay:not(.hidden)')) return;
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select' || tag === 'button' || tag === 'summary') return;
+      if (e.key === ' ' || e.key === 'k') {
+        e.preventDefault();
+        bardToggle();
+      } else if (e.key === 'ArrowLeft') {
+        bardSkip(-10);
+      } else if (e.key === 'ArrowRight') {
+        bardSkip(10);
+      }
+    });
+
+    // ---------- Lyrics ----------
+
+    function bardLoadLyrics() {
+      const body = document.getElementById('lyrics-body');
+      if (bardCurrent < 0) {
+        body.textContent = 'Choose a song to see its lyrics.';
+        return;
+      }
+      if (bardLyricsFor === bardCurrent) return;
+      const song = SONGS[bardCurrent];
+      const wanted = bardCurrent;
+      const placeholder = 'Lyrics yet to be transcribed.';
+      if (!song.lyrics) {
+        body.textContent = placeholder;
+        bardLyricsFor = wanted;
+        return;
+      }
+      body.textContent = 'Unrolling the scroll…';
+      fetch(song.lyrics, { cache: 'no-cache' })
+        .then(r => { if (!r.ok) throw new Error('missing'); return r.text(); })
+        .then(text => {
+          if (wanted !== bardCurrent) return;
+          body.textContent = text.trim() || placeholder;
+          bardLyricsFor = wanted;
+        })
+        .catch(() => {
+          if (wanted !== bardCurrent) return;
+          body.textContent = placeholder;
+          bardLyricsFor = wanted;
+        });
+    }
+
+    document.getElementById('lyrics-panel').addEventListener('toggle', (e) => {
+      if (e.target.open) bardLoadLyrics();
+    });
+
+    // ---------- Phone lock screen and headphone controls ----------
+
+    function bardSetMediaSession(song) {
+      if (!('mediaSession' in navigator)) return;
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: song.title,
+          artist: song.artist,
+          album: "Natural Twenty: Bard's Hall"
+        });
+        navigator.mediaSession.setActionHandler('play', () => bardPlay());
+        navigator.mediaSession.setActionHandler('pause', () => bardAudio.pause());
+        navigator.mediaSession.setActionHandler('seekbackward', () => bardSkip(-10));
+        navigator.mediaSession.setActionHandler('seekforward', () => bardSkip(10));
+        navigator.mediaSession.setActionHandler('previoustrack', bardPrev);
+        navigator.mediaSession.setActionHandler('nexttrack', bardNext);
+      } catch (e) { /* not supported on this browser */ }
+    }
+
+    // ---------- Start ----------
+
+    bardAudio.volume = Number(bardVolume.value);
+    bardSyncVolume();
+    bardSyncPlayIcon();
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb37232574e29c5',t:'MTc2Nzk1NjU4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
