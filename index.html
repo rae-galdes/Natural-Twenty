@@ -779,8 +779,38 @@
     #btn-back svg,
     #btn-fwd svg { width: 24px; height: 24px; }
 
+    .song-card {
+      --tint: 201, 161, 95;
+      --tint-light: 224, 191, 128;
+      background-image:
+        var(--grain-soft),
+        radial-gradient(ellipse 90% 80% at 50% 0%, rgba(var(--tint), 0.24), transparent 70%),
+        linear-gradient(180deg, #33271c 0%, #231a12 100%);
+      border-color: rgba(var(--tint), 0.5);
+    }
+
+    .song-card::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: 7px;
+      height: 2px;
+      background: rgba(var(--tint), 0.75);
+      pointer-events: none;
+    }
+
+    .song-card .song-icon,
+    .song-card:hover .song-icon {
+      color: rgb(var(--tint-light));
+    }
+
+    @media (hover: hover) {
+      .song-card:hover { border-color: rgba(var(--tint-light), 0.85); }
+    }
+
     .song-card.is-active {
-      border-color: var(--gilt);
+      border-color: rgb(var(--tint-light));
     }
 
     .song-card.is-active::before {
@@ -815,7 +845,7 @@
     .eq span {
       width: 3px;
       height: 100%;
-      background: var(--rubric-light);
+      background: rgb(var(--tint-light, 176, 65, 44));
       transform-origin: bottom;
       transform: scaleY(0.3);
     }
@@ -960,6 +990,51 @@
       overflow-y: auto;
       padding: 0.5rem 1rem 1rem;
       animation: fadeIn 0.3s ease both;
+    }
+
+    /* ---------- Compact player bar ---------- */
+
+    .player-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .player-info { min-width: 0; }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .player-volume {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    #music-player .player-btn { width: 36px; height: 36px; }
+    #music-player .player-btn svg { width: 16px; height: 16px; }
+    #music-player #btn-back svg,
+    #music-player #btn-fwd svg { width: 20px; height: 20px; }
+    #music-player .player-btn-main { width: 48px; height: 48px; }
+    #music-player .player-btn-main svg { width: 20px; height: 20px; }
+    #music-player .player-btn-small { width: 30px; height: 30px; }
+    #music-player .player-btn-small svg { width: 14px; height: 14px; }
+
+    #music-player .lyrics-panel summary { padding: 0.45rem; font-size: 0.9rem; }
+
+    @media (max-width: 640px) {
+      .player-row { grid-template-columns: 1fr auto; gap: 0.75rem; }
+      .player-info { grid-column: 1 / -1; text-align: center; }
+      .player-controls { justify-self: center; }
+      .player-volume input { display: none; }
+      .song-card { flex-basis: 9rem; padding: 0.85rem 0.6rem; }
+      .song-title { font-size: 1.1rem; }
+      .song-icon svg { width: 2.6rem; height: 2.6rem; }
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -1150,33 +1225,31 @@
        <div class="ornament w-32 mx-auto mt-3"></div>
       </div>
       <div id="song-list" class="flex flex-wrap justify-center gap-4 mb-8"></div>
-      <section id="music-player" class="section-card rounded-lg p-6 md:p-10" aria-label="Music player">
-       <div class="pixel-corner corner-tl"></div>
-       <div class="pixel-corner corner-tr"></div>
-       <div class="pixel-corner corner-bl"></div>
-       <div class="pixel-corner corner-br"></div>
+      <section id="music-player" class="section-card rounded-lg px-4 py-4 md:px-6" aria-label="Music player">
        <audio id="bard-audio" preload="metadata"></audio>
-       <div class="text-center mb-6">
-        <p id="player-status" class="text-xs uppercase tracking-widest text-amber-600 font-title-dice" aria-live="polite">Silence in the hall</p>
-        <h2 id="player-title" class="font-title-dice text-3xl md:text-4xl text-amber-400 mt-2">Choose an instrument</h2>
-        <p id="player-artist" class="text-amber-500 italic mt-1 min-h-[1.5rem]"></p>
+       <div class="player-row">
+        <div class="player-info">
+         <p id="player-status" class="text-xs uppercase tracking-widest text-amber-600 font-title-dice" aria-live="polite">Silence in the hall</p>
+         <h2 id="player-title" class="font-title-dice text-xl md:text-2xl text-amber-400 leading-tight truncate">Choose an instrument</h2>
+         <p id="player-artist" class="text-amber-500 italic text-sm truncate"></p>
+        </div>
+        <div class="player-controls"><button type="button" id="btn-prev" class="player-btn" aria-label="Previous song" disabled>
+          <svg viewbox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="2.5" height="14" rx="0.5" /><path d="M19 5v14L8.5 12z" /></svg></button> <button type="button" id="btn-back" class="player-btn" aria-label="Back 10 seconds" disabled>
+          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a7.5 7.5 0 1 1-7 4.8" /><path d="M4.5 4v5.3h5.3" /><text x="12.4" y="15.6" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Georgia, serif" fill="currentColor" stroke="none">10</text></svg></button> <button type="button" id="btn-play" class="player-btn player-btn-main" aria-label="Play">
+          <svg id="icon-play" viewbox="0 0 24 24" fill="currentColor"><path d="M8 4.8v14.4L19.5 12z" /></svg>
+          <svg id="icon-pause" class="hidden" viewbox="0 0 24 24" fill="currentColor"><rect x="6" y="4.8" width="4" height="14.4" rx="1" /><rect x="14" y="4.8" width="4" height="14.4" rx="1" /></svg></button> <button type="button" id="btn-fwd" class="player-btn" aria-label="Forward 10 seconds" disabled>
+          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a7.5 7.5 0 1 0 7 4.8" /><path d="M19.5 4v5.3h-5.3" /><text x="11.6" y="15.6" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Georgia, serif" fill="currentColor" stroke="none">10</text></svg></button> <button type="button" id="btn-next" class="player-btn" aria-label="Next song" disabled>
+          <svg viewbox="0 0 24 24" fill="currentColor"><path d="M5 5v14l10.5-7z" /><rect x="16.5" y="5" width="2.5" height="14" rx="0.5" /></svg></button>
+        </div>
+        <div class="player-volume"><button type="button" id="btn-mute" class="player-btn player-btn-small" aria-label="Mute">
+          <svg id="icon-volume" viewbox="0 0 24 24" fill="currentColor"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          <svg id="icon-muted" class="hidden" viewbox="0 0 24 24" fill="currentColor"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></button> <input id="bard-volume" type="range" min="0" max="1" step="0.01" value="0.9" class="player-range w-24" aria-label="Volume">
+        </div>
        </div>
-       <div class="flex items-center gap-3"><span id="time-current" class="player-time">0:00</span> <input id="bard-progress" type="range" min="0" max="1000" step="1" value="0" class="player-range flex-1" aria-label="Seek" disabled> <span id="time-total" class="player-time">0:00</span>
+       <div class="flex items-center gap-3 mt-3"><span id="time-current" class="player-time">0:00</span> <input id="bard-progress" type="range" min="0" max="1000" step="1" value="0" class="player-range flex-1" aria-label="Seek" disabled> <span id="time-total" class="player-time">0:00</span>
        </div>
-       <div class="flex items-center justify-center gap-3 md:gap-4 mt-6"><button type="button" id="btn-prev" class="player-btn" aria-label="Previous song" disabled>
-         <svg viewbox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="2.5" height="14" rx="0.5" /><path d="M19 5v14L8.5 12z" /></svg></button> <button type="button" id="btn-back" class="player-btn" aria-label="Back 10 seconds" disabled>
-         <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a7.5 7.5 0 1 1-7 4.8" /><path d="M4.5 4v5.3h5.3" /><text x="12.4" y="15.6" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Georgia, serif" fill="currentColor" stroke="none">10</text></svg></button> <button type="button" id="btn-play" class="player-btn player-btn-main" aria-label="Play">
-         <svg id="icon-play" viewbox="0 0 24 24" fill="currentColor"><path d="M8 4.8v14.4L19.5 12z" /></svg>
-         <svg id="icon-pause" class="hidden" viewbox="0 0 24 24" fill="currentColor"><rect x="6" y="4.8" width="4" height="14.4" rx="1" /><rect x="14" y="4.8" width="4" height="14.4" rx="1" /></svg></button> <button type="button" id="btn-fwd" class="player-btn" aria-label="Forward 10 seconds" disabled>
-         <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5a7.5 7.5 0 1 0 7 4.8" /><path d="M19.5 4v5.3h-5.3" /><text x="11.6" y="15.6" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Georgia, serif" fill="currentColor" stroke="none">10</text></svg></button> <button type="button" id="btn-next" class="player-btn" aria-label="Next song" disabled>
-         <svg viewbox="0 0 24 24" fill="currentColor"><path d="M5 5v14l10.5-7z" /><rect x="16.5" y="5" width="2.5" height="14" rx="0.5" /></svg></button>
-       </div>
-       <div class="flex items-center justify-center gap-3 mt-6"><button type="button" id="btn-mute" class="player-btn player-btn-small" aria-label="Mute">
-         <svg id="icon-volume" viewbox="0 0 24 24" fill="currentColor"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-         <svg id="icon-muted" class="hidden" viewbox="0 0 24 24" fill="currentColor"><path d="M4 9h4l5-4v14l-5-4H4z" /><path d="M16 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></button> <input id="bard-volume" type="range" min="0" max="1" step="0.01" value="0.9" class="player-range w-36" aria-label="Volume">
-       </div>
-       <p id="player-error" class="text-red-400 text-sm text-center mt-4 min-h-[1.25rem] font-body-dice" role="alert"></p>
-       <details id="lyrics-panel" class="lyrics-panel mt-2">
+       <p id="player-error" class="text-red-400 text-sm text-center mt-2 font-body-dice empty:hidden" role="alert"></p>
+       <details id="lyrics-panel" class="lyrics-panel mt-3">
         <summary>Lyrics <svg class="chev w-4 h-4" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6" /></svg></summary>
         <div id="lyrics-body" class="lyrics-body">Choose a song to see its lyrics.</div>
        </details>
@@ -2247,10 +2320,23 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
          2. Add one line to SONGS below, copying the pattern.
        instrument can be: lute, drum, horn, flute, harp
        lyrics is optional: the path to a plain .txt file, or ''
+       color is optional: oxblood, moss, slate, ochre, plum
+         (leave it out and tiles take the next colour in that order)
        ========================================================= */
     const SONGS = [
-      { title: 'Hey You', artist: 'Druncle', instrument: 'lute', src: 'music/hey-you.mp3', lyrics: 'music/hey-you.txt' }
+      { title: 'Hey You', artist: 'Druncle', instrument: 'lute', src: 'music/hey-you.mp3', lyrics: 'music/hey-you.txt' },
+      { title: 'Ballad of the Path', artist: '', instrument: 'harp', src: 'music/ballad-of-the-path.mp3', lyrics: 'music/ballad-of-the-path.txt' },
+      { title: 'Welcome to Wellis', artist: '', instrument: 'drum', src: 'music/welcome-to-wellis.mp3', lyrics: 'music/welcome-to-wellis.txt' }
     ];
+
+    const TILE_COLOURS = {
+      oxblood: { tint: '176, 65, 44',  light: '214, 120, 95' },
+      moss:    { tint: '104, 138, 72', light: '160, 190, 120' },
+      slate:   { tint: '86, 118, 150', light: '140, 170, 200' },
+      ochre:   { tint: '196, 146, 58', light: '228, 190, 110' },
+      plum:    { tint: '136, 78, 128', light: '190, 135, 180' }
+    };
+    const TILE_ORDER = ['oxblood', 'moss', 'slate', 'ochre', 'plum'];
 
     const BARDS_HALL_PASSWORD = 'hourglass';
 
@@ -2357,11 +2443,16 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
           '<div class="flex flex-col items-center gap-2">' +
             '<div class="menu-icon song-icon">' + (INSTRUMENT_ICONS[song.instrument] || INSTRUMENT_ICONS.lute) + '</div>' +
             '<h3 class="song-title text-amber-300"></h3>' +
-            '<p class="text-amber-500/80 text-xs"><span class="song-artist"></span> · <span class="song-length">--:--</span></p>' +
+            '<p class="text-amber-500/80 text-xs"><span class="song-artist"></span><span class="song-length">--:--</span></p>' +
             '<div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></div>' +
           '</div>';
         card.querySelector('.song-title').textContent = song.title;
-        card.querySelector('.song-artist').textContent = song.artist;
+        if (song.artist) {
+          card.querySelector('.song-artist').textContent = song.artist + ' · ';
+        }
+        const colour = TILE_COLOURS[song.color] || TILE_COLOURS[TILE_ORDER[i % TILE_ORDER.length]];
+        card.style.setProperty('--tint', colour.tint);
+        card.style.setProperty('--tint-light', colour.light);
         card.addEventListener('click', () => bardSelect(i));
         list.appendChild(card);
 
