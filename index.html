@@ -2326,7 +2326,10 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
     const SONGS = [
       { title: 'Hey You', artist: 'Druncle', instrument: 'lute', src: 'music/hey-you.mp3', lyrics: 'music/hey-you.txt' },
       { title: 'Ballad of the Path', artist: '', instrument: 'harp', src: 'music/ballad-of-the-path.mp3', lyrics: 'music/ballad-of-the-path.txt' },
-      { title: 'Welcome to Wellis', artist: '', instrument: 'drum', src: 'music/welcome-to-wellis.mp3', lyrics: 'music/welcome-to-wellis.txt' }
+      { title: 'Welcome to Wellis', artist: '', instrument: 'drum', src: 'music/welcome-to-wellis.mp3', lyrics: 'music/welcome-to-wellis.txt' },
+      { title: 'Hero of the Hills and Valleys', artist: '', instrument: 'horn', src: 'music/hero-of-the-hills-and-valleys.mp3', lyrics: 'music/hero-of-the-hills-and-valleys.txt' },
+      { title: 'Dance of the Threadborn', artist: '', instrument: 'flute', src: 'music/dance-of-the-threadborn.mp3', lyrics: 'music/dance-of-the-threadborn.txt' },
+      { title: 'Day-O', artist: 'Lord Reginald Rookgrave', instrument: 'drum', color: 'ochre', src: 'music/day-o.mp3', lyrics: 'music/day-o.txt' }
     ];
 
     const TILE_COLOURS = {
@@ -2337,6 +2340,7 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
       plum:    { tint: '136, 78, 128', light: '190, 135, 180' }
     };
     const TILE_ORDER = ['oxblood', 'moss', 'slate', 'ochre', 'plum'];
+    const UNKNOWN_BARD = 'Unknown Bard';
 
     const BARDS_HALL_PASSWORD = 'hourglass';
 
@@ -2447,9 +2451,7 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
             '<div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></div>' +
           '</div>';
         card.querySelector('.song-title').textContent = song.title;
-        if (song.artist) {
-          card.querySelector('.song-artist').textContent = song.artist + ' · ';
-        }
+        card.querySelector('.song-artist').textContent = (song.artist || UNKNOWN_BARD) + ' · ';
         const colour = TILE_COLOURS[song.color] || TILE_COLOURS[TILE_ORDER[i % TILE_ORDER.length]];
         card.style.setProperty('--tint', colour.tint);
         card.style.setProperty('--tint-light', colour.light);
@@ -2527,7 +2529,7 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
       bardSetError('');
       bardAudio.src = song.src;
       document.getElementById('player-title').textContent = song.title;
-      document.getElementById('player-artist').textContent = song.artist;
+      document.getElementById('player-artist').textContent = song.artist || UNKNOWN_BARD;
       bardSetStatus('Tuning the ' + song.instrument + '…');
       bardResetProgress();
       bardSetControls(true);
@@ -2695,7 +2697,7 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
       if (bardLyricsFor === bardCurrent) return;
       const song = SONGS[bardCurrent];
       const wanted = bardCurrent;
-      const placeholder = 'Lyrics yet to be transcribed.';
+      const placeholder = 'Enjoy the instrumentals.';
       if (!song.lyrics) {
         body.textContent = placeholder;
         bardLyricsFor = wanted;
@@ -2727,7 +2729,7 @@ Factor in your silver tongue, your standing in the realm, and strike deals that 
       try {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
-          artist: song.artist,
+          artist: song.artist || UNKNOWN_BARD,
           album: "Natural Twenty: Bard's Hall"
         });
         navigator.mediaSession.setActionHandler('play', () => bardPlay());
